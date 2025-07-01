@@ -10,7 +10,10 @@
     },
     {
       "src": "backend/api/index.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb"
+      }
     }
   ],
   "routes": [
@@ -24,5 +27,10 @@
     }
   ],
   "installCommand": "cd frontend && npm install",
-  "buildCommand": "cd frontend && npm run build"
+  "buildCommand": "cd frontend && npm run build",
+  "functions": {
+    "backend/api/index.py": {
+      "maxDuration": 10
+    }
+  }
 }

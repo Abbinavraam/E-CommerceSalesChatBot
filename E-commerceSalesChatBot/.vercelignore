@@ -36,3 +36,20 @@ coverage/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Backend development files (keep only api folder for Vercel)
+backend/app/
+backend/run*.py
+backend/check_db.py
+backend/config.py
+backend/minimal_server.py
+backend/simple_test.py
+backend/test_*.py
+backend/*.html
+backend/conftest.py
+backend/tests/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3

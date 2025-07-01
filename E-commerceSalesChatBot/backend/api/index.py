@@ -3,14 +3,10 @@ from flask_cors import CORS, cross_origin
 import json
 import time
 import random
-import sys
-import os
-
-# Add the parent directory to the path to import mock_data
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import uuid
 
 app = Flask(__name__)
-CORS(app, origins="*", allow_headers=["Content-Type", "Authorization"], 
+CORS(app, origins="*", allow_headers=["Content-Type", "Authorization"],
      methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], supports_credentials=False)
 
 # Import the real product data from mock_data.py
@@ -23,7 +19,8 @@ try:
         product['id'] = i + 1
         product['rating'] = round(3.5 + (random.random() * 1.5), 1)  # Random rating between 3.5-5.0
     print(f"Loaded {len(sample_products)} products with images and ratings")
-except ImportError:
+except ImportError as e:
+    print(f"Import error: {e}")
     # Fallback to simple products if mock_data import fails
     sample_products = [
         {"id": 1, "name": "iPhone 15 Pro", "price": 999.99, "category": "Electronics", "stock": 50, "rating": 4.8, "image_url": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop"},
@@ -254,7 +251,6 @@ def start_chat():
         return response
     
     # Mock chat session start
-    import uuid
     session_id = str(uuid.uuid4())
     
     response = jsonify({
@@ -322,8 +318,12 @@ def send_message():
     return response
 
 # Vercel serverless function handler
-def handler(request):
-    return app(request.environ, lambda status, headers: None)
+def handler(request, response):
+    """Vercel serverless function handler"""
+    return app(request, response)
+
+# For Vercel deployment
+app_handler = app
 
 if __name__ == '__main__':
     print("Starting Flask server...")
