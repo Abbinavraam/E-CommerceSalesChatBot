@@ -3,7 +3,9 @@ import { toast } from 'react-toastify';
 
 // Create axios instance with base configuration
 const api = axios.create({
-  baseURL: '', // Use relative URLs with Vite proxy
+  baseURL: process.env.NODE_ENV === 'production'
+    ? '' // Use relative URLs in production (Vercel will handle routing)
+    : '', // Use relative URLs in development (Vite proxy)
   timeout: 10000,
   // Remove default headers to avoid preflight issues
 });

@@ -134,6 +134,40 @@ npm run dev
 - **Analytics**: User behavior tracking
 - **Testing Suite**: Automated testing framework
 
+## 🌐 Vercel Deployment
+
+### Automatic Deployment
+This project is configured for seamless deployment on Vercel:
+
+1. **Fork/Clone the Repository**
+2. **Connect to Vercel**: Import the project in your Vercel dashboard
+3. **Deploy**: Vercel will automatically build and deploy both frontend and backend
+
+### Manual Deployment Steps
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy to Vercel
+vercel
+
+# Follow the prompts to configure your deployment
+```
+
+### Deployment Configuration
+- **Frontend**: Automatically built with Vite and served as static files
+- **Backend**: Deployed as Vercel serverless functions
+- **API Routes**: All `/api/*` requests routed to Python backend
+- **Static Assets**: Frontend assets served from CDN
+
+### Live Demo
+🚀 **[View Live Demo](https://your-vercel-url.vercel.app)**
+
+### Environment Variables (Optional)
+For production customization, you can set these in Vercel dashboard:
+- `NODE_ENV`: Set to 'production' (automatically set by Vercel)
+- `API_BASE_URL`: Custom API base URL (optional)
+
 ## 📚 Documentation
 
 - **[Frontend README](./frontend/README.md)**: Detailed frontend documentation
